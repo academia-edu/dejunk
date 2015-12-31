@@ -67,3 +67,7 @@ push git commits and tags, and push the `.gem` file to [rubygems.org](https://ru
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/academia-edu/dejunk
+
+## License
+
+Apache 2.0

@@ -1,3 +1,5 @@
+# I wish we just used Travis
+
 machine:
   ruby:
     version: 2.2.3

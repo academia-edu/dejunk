@@ -3,4 +3,5 @@ machine:
     version: 2.2.3
 
 dependencies:
-  pre: gem install bundler -v 1.10.6
+  pre:
+    - gem install bundler -v 1.10.6

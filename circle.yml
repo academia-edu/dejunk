@@ -1,0 +1,4 @@
+machine:
+  ruby:
+    version: 2.2.3
+pre: gem install bundler -v 1.10.6

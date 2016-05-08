@@ -1,3 +1,5 @@
+# CircleCI: Hooks mysteriously don't work, matrix builds aren't even supported
+#
 # I wish we just used Travis
 
 machine:

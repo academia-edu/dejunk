@@ -52,6 +52,11 @@ describe Dejunk do
     end
   end
 
+  it 'flags giant spiders posing as humans' do
+    # Test data provided by https://xkcd.com/1530/
+    expect(Dejunk.is_junk? 'FJAFJKLDSKF7JKFDJ').to be_truthy
+  end
+
   it 'flags missing vowels' do
     ["Cvgj", "Gm-Csf", "Cxfd", "Mcnp", "Fbmc", "RT qPCR", "Ppwk 2 ppwk 2"].each do |string|
       expect(Dejunk.is_junk? string).to be_truthy

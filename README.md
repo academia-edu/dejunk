@@ -1,5 +1,7 @@
 # Dejunk
 
+[![CircleCI](https://circleci.com/gh/academia-edu/dejunk.svg?style=svg)](https://circleci.com/gh/academia-edu/dejunk)
+
 Detect keyboard mashing and other junk in your data.
 
 For example, if you allow user-entered tags, but want to hide bad ones. Or if

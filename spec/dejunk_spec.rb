@@ -8,13 +8,13 @@ describe Dejunk do
   it 'does not flag various research fields' do
     fields = YAML.load_file(File.expand_path('../../spec/fields.yml', __FILE__))
     fields.each do |field|
-      expect(Dejunk.is_junk? field).to be_falsey
+      expect(field).not_to be_junk
     end
   end
 
   it 'does not flag some words with less common bigrams' do
     ["Unknown", "Weight", "e-book", "Hockey", "Zimbabwe", "Kyrgyz", "Kyrgyzstan", "Uyghur"].each do |word|
-      expect(Dejunk.is_junk? word).to be_falsey
+      expect(word).not_to be_junk
     end
   end
 
@@ -42,54 +42,54 @@ describe Dejunk do
 
   it 'flags mashing' do
     ["RKJM", "Asdf", "Y5egrdfvc", "Asdfghjkl", "qwee", "asasasasa", "Asdf", "DFFF", "Asd Asd", "Zaza", "Nawwww"].each do |string|
-      expect(Dejunk.is_junk? string).to be_truthy
+      expect(string).to be_junk
     end
   end
 
   it 'flags unlikely bigrams' do
     ["MJA 2008; 188 (4): 209-213", "PEDS20140694 1001..1008", "Hkygj,n", "LH-ftyy", "4D4U-QSRT-5F76-JBT9-EACE", "Guia-ev-v2", "Bell-pdf"].each do |string|
-      expect(Dejunk.is_junk? string).to be_truthy
+      expect(string).to be_junk
     end
   end
 
   it 'flags giant spiders posing as humans' do
     # Test data provided by https://xkcd.com/1530/
-    expect(Dejunk.is_junk? 'FJAFJKLDSKF7JKFDJ').to be_truthy
+    expect('FJAFJKLDSKF7JKFDJ').to be_junk
   end
 
   it 'flags missing vowels' do
     ["Cvgj", "Gm-Csf", "Cxfd", "Mcnp", "Fbmc", "RT qPCR", "Ppwk 2 ppwk 2"].each do |string|
-      expect(Dejunk.is_junk? string).to be_truthy
+      expect(string).to be_junk
     end
   end
 
   it 'flags missing alphabetical chars' do
     ["081280622019", "01:32"].each do |string|
-      expect(Dejunk.is_junk? string).to be_truthy
+      expect(string).to be_junk
     end
   end
 
   it 'flags bad punctuation' do
     ["#iranelection on The Page 99 Test.", "-Biodescodificacion, dicc", "• Problems of Crime and Violence in Europe 1750-2000"].each do |string|
-      expect(Dejunk.is_junk? string).to be_truthy
+      expect(string).to be_junk
     end
   end
 
   it 'flags repeated chars' do
     ["Aaaa", "Iiiiiiiii", "Economiaaaaaa", "Engineeering", "Sssaj-75-1-102[1] - Aiken 2011"].each do |string|
-      expect(Dejunk.is_junk? string).to be_truthy
+      expect(string).to be_junk
     end
   end
 
   it 'flags multi-character repeats' do
     ["draft draft draft", "Bla Bla Bla"].each do |string|
-      expect(Dejunk.is_junk? string).to be_truthy
+      expect(string).to be_junk
     end
   end
 
   it 'flags excessive short words' do
     ["t i Qu n l i m h c sinh trung h c ph th ng - Lu n v n n t i t t nghi p", "H T M L", "case s t r o k e", "Oresajo et al 15 1"].each do |string|
-      expect(Dejunk.is_junk? string).to be_truthy
+      expect(string).to be_junk
     end
   end
 end

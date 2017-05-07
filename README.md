@@ -53,7 +53,9 @@ $ Dejunk.is_junk?('Hi', whitelist_regexes: [/\Ahi\z/i])
 
 Returns a reason when junk is detected for aid in debugging. Optional parameters
 are `min_alnum_chars` (defaults to 3), and `whitelist_strings` and
-`whitelist_regexes` (both default to none).
+`whitelist_regexes` (both default to none, but you'll likely want some domain-specific 
+strings here, which you might discover by checking against a sample from your existing
+corpus).
 
 ## Development
 

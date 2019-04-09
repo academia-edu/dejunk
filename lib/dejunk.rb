@@ -131,11 +131,11 @@ module Dejunk
     return 0 unless bigrams.present?
 
     prob_bigrams_given_mashing = bigrams.
-      map { |bigram| BigDecimal.new(mashing_probability(bigram).to_s) }.
+      map { |bigram| BigDecimal(mashing_probability(bigram).to_s) }.
       inject(&:*)
 
     prob_bigrams_given_corpus = bigrams.
-      map { |bigram| BigDecimal.new(corpus_probability(bigram).to_s) }.
+      map { |bigram| BigDecimal(corpus_probability(bigram).to_s) }.
       inject(&:*)
 
     numerator = prob_bigrams_given_mashing * apriori_probability_of_mashing

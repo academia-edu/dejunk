@@ -229,9 +229,6 @@ module Dejunk
   def mashing_probability(bigram)
     if (f = mashing_bigram_frequencies[bigram])
       f
-    elsif f =~ /[a-z]{2}/i
-      # 26**2 = 676, so 1 in 2k seems a reasonable probability for an arbitrary two-letter bigram given mashing
-      0.0005
     else
       # An arbitrary (non-ASCII) bigram with mashing is slightly more probable than with legit strings
       1e-6

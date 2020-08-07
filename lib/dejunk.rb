@@ -146,7 +146,7 @@ module Dejunk
   def normalize_for_comparison(string)
     string.
       mb_chars.
-      normalize(:kd).
+      unicode_normalize(:nfkd).
       gsub(/\p{Mn}+/, ''.freeze).
       gsub(/[^[:alnum:]]+/, ''.freeze).
       downcase

@@ -6,7 +6,7 @@ require 'dejunk/version'
 Gem::Specification.new do |spec|
   spec.name          = "dejunk"
   spec.version       = Dejunk::VERSION
-  spec.required_ruby_version = '~> 2.3'
+  spec.required_ruby_version = '>= 2.3'
   spec.authors       = ["David Judd"]
   spec.email         = ["david@academia.edu"]
 

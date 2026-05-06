@@ -1,6 +1,8 @@
 require "dejunk/version"
 require "yaml"
+require 'bigdecimal'
 require "active_support/core_ext/string"
+require "active_support/core_ext/object/blank"
 
 module Dejunk
   extend self

@@ -113,7 +113,7 @@ module Dejunk
     string.
       chars.
       zip(string.chars[1..-1]).
-      map { |c1,c2| "#{c1.mb_chars.downcase}#{c2.mb_chars.downcase}" if c1 && c2 }.
+      map { |c1,c2| "#{c1.downcase}#{c2.downcase}" if c1 && c2 }.
       compact.
       map { |bigram| bigram.gsub(/[0-9]/, '0'.freeze) }.
       map { |bigram| bigram.gsub(/[[:space:]]/, ' '.freeze) }
@@ -144,8 +144,12 @@ module Dejunk
   end
 
   def normalize_for_comparison(string)
+    # This mirrors what mb_chars did, assuming that non-UTF-8 encoded strings
+    # are actually UTF-8 in disguise. It's unclear whether this is necessary,
+    # but we left it in to avoid having to figure this out.
+    string = string.dup.force_encoding(Encoding::UTF_8) if string.encoding != Encoding::UTF_8
+
     string.
-      mb_chars.
       unicode_normalize(:nfkd).
       gsub(/\p{Mn}+/, ''.freeze).
       gsub(/[^[:alnum:]]+/, ''.freeze).

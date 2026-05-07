@@ -6,7 +6,7 @@ require 'dejunk/version'
 Gem::Specification.new do |spec|
   spec.name          = "dejunk"
   spec.version       = Dejunk::VERSION
-  spec.required_ruby_version = '>= 2.3'
+  spec.required_ruby_version = '>= 3.3'
   spec.authors       = ["David Judd"]
   spec.email         = ["david@academia.edu"]
 
@@ -20,7 +20,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'activesupport'
 
-  spec.add_development_dependency "bundler", "~> 2.0"
-  spec.add_development_dependency "rake", "~> 12.3.3"
+  spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
 end

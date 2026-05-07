@@ -1,19 +1,15 @@
 version: 2.1
 
-orbs:
-  ruby: circleci/ruby@1.4.0
-
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.0.1
+      - image: cimg/ruby:3.4.8
     steps:
       - checkout
-      - ruby/install-deps
-      - ruby/rspec-test
+      - run: bundle install
+      - run: bundle exec rspec
 
 workflows:
-  version: 2
   build_and_test:
     jobs:
       - build

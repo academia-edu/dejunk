@@ -1,6 +1,5 @@
 require "active_support/core_ext/object/blank"
 require "active_support/core_ext/string"
-require "bigdecimal"
 require "yaml"
 
 require "dejunk/version"
@@ -133,17 +132,16 @@ module Dejunk
 
     return 0 unless bigrams.present?
 
-    prob_bigrams_given_mashing = bigrams.
-      map { |bigram| BigDecimal(mashing_probability(bigram).to_s) }.
-      inject(&:*)
+    # Work in log space because the raw products of per-bigram probabilities
+    # underflow Float.
+    log_prob_given_mashing = bigrams.sum { |bigram| Math.log(mashing_probability(bigram)) }
+    log_prob_given_corpus = bigrams.sum { |bigram| Math.log(corpus_probability(bigram)) }
 
-    prob_bigrams_given_corpus = bigrams.
-      map { |bigram| BigDecimal(corpus_probability(bigram).to_s) }.
-      inject(&:*)
+    # Equivalent to mashing / (mashing + corpus), with the priors applied.
+    log_odds_ratio = log_prob_given_corpus + Math.log(1 - apriori_probability_of_mashing) -
+      log_prob_given_mashing - Math.log(apriori_probability_of_mashing)
 
-    numerator = prob_bigrams_given_mashing * apriori_probability_of_mashing
-
-    numerator / (numerator + prob_bigrams_given_corpus * (1 - apriori_probability_of_mashing))
+    1.0 / (1.0 + Math.exp(log_odds_ratio))
   end
 
   def normalize_for_comparison(string)

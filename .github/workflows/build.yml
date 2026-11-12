@@ -7,8 +7,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@v7.0.1
+      - uses: ruby/setup-ruby@v1.338.0
         with:
           ruby-version: .tool-versions
           bundler-cache: true
